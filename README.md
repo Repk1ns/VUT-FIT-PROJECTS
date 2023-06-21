@@ -3,7 +3,7 @@
 Tak jako velká spousta mých vysokoškolských kolegů dává své projekty veřejně k dispozici, pro některé jsem se rozhodl i já (alespoň pro ty povedené). 
 Projekty by měli sloužit především dalším generacím pro inspiraci a bližšímu porozumění.
 Pro vaše dobro, prosím, nekopírujte projekty 1:1, pokud se zadání příliš nezměnilo. Plagiáty bývají často kontrolovány.
-Snažte se problematice spíše porozumět a vypracovat projekt samostatně. Nakonec budete mít lepší pocit.
+Snažte se problematice spíše porozumět a vypracovat projekt samostatně. Nakonec budete mít lepší pocit a hlavně vám to dá cenné zkušenosti.
 
 Bližší informace o konkrétním projektu jsou uvnitř složky s projektem.
 
