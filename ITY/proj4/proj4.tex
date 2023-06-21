@@ -1,0 +1,81 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[top=3cm, left=2cm, text={17cm, 24cm}]{geometry}
+\usepackage{times}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+
+\begin{document}
+	
+\begin{titlepage}
+\begin{center}
+{\Huge
+\textsc{Vysoké učení technické v~Brně\\[0.4em]}}
+{\huge \textsc{Fakulta informačních technologií}}\\
+\vspace{\stretch{0.382}}
+{\Large
+Typografie a publikování\,--\,4. projekt\\[0.3em]
+\Huge{Citace}
+\vspace{\stretch{0.618}}
+}
+	
+\end{center}
+		
+{\Large 19. dubna 2021 \hfill Vojtěch Mimochodek}
+\end{titlepage}
+
+\section{O typografii}
+Typografie je obor zabývající se tiskovým písmem. A~to především jeho správným výběrem, použitím a sazbou. Úkolem typografie je zajistit čtení pro čtenáře jednodušší, srozumitelnější, zábavnější a~zefektivnit vnímání čteného textu.
+\cite{strafelda}
+
+Při psaní textů je potřeba dodržovat základní typografická pravidla. Je to z~toho důvodu, aby text vypadal dobře, dobře se četl a abychom se vyhnuli chybám v~sazbě textu. Dodržováním těchto pravidel lze dosáhnout profesionálního vzhledu, což se hodí například při psaní životopisu do nového zaměstnání.
+\cite{Horny}
+
+\subsection{Bibliografické citace}
+Velmi důležitou částí dokumentů jsou bibliografické citace. Je to souhrn údajů o~citované publikaci a~umožňují její vyhledání a~identifikaci. Rovněž je důležité dodržovat určitá bibliografická pravidla citací:
+\begin{itemize}
+\item Je potřeba citovat všechna díla, ze kterých se čerpalo.
+\item Citujeme pouze díla, ze kterých jsme skutečně čerpali.
+\item Citujeme pouze z~primárních pramenů
+\item Citace je potřeba uvádět přesně.
+\end{itemize}
+
+Bibliografické citace se uvádějí proto, aby bylo jasné, z~jakých zdrojů se čerpalo, aby se čtenář uvedl do širších souvislostí (například si mohl dostudovat látku, která v~práci není vysvětlena) a~proto, aby byly splněny podmínky autorského zákona.
+\cite{bibCitace}
+
+\subsection{Významní typografové}
+Známí typografové, jejichž písma jsou v dnešní době hojně používána, jsou například:
+\begin{itemize}
+\item \textbf{Stanley Morison}, anglický tiskař. Autor písma \texttt{Times New Roman}.
+\item \textbf{Matthew Carter}, autor písem \texttt{Verdana}, \texttt{Tahoma} a~\texttt{Georgia}.
+\item \textbf{Vincent Connare}, autor písma \texttt{Comic Sans}.
+\item \textbf{Josef Mánes}, český obrozenec a~autor iniciál a~ilustrací k Rukopisu zelenohorskému a~Rukopisu královédvorskému.
+\item \textbf{Mikoláš Aleš}
+\end{itemize}
+a mnoho dalších$\dots$
+\cite{Wiki}
+
+\section{Vhodný nástroj}
+Pro typografické práce je nutné zvolit vhodný nástroj. Jedním takovým je například \TeX. Efektivní nástroj pro tvorbu krásných knih či jiných publikací. Vhodný je především pro takové, které obsahují větší množštví matematiky. \cite{TexBook}
+
+Zápis matematických výrazů je s~nástrojem {\LaTeX} hračka.
+\begin{center}
+$E(\prod_{i=1}^{n}X_i) = \prod_{i=1}^{n}E(X_i)$ \cite{dipl2}
+\end{center}
+
+Pomocí nástroje {\LaTeX} lze šikovně vysázet také chemické texty, jejichž problematika není právě triviální.~\cite{cstug}
+
+Ke tvorbě textů prostřednictvím {\LaTeX}u je dobré si vybrat také optimální editor. Nejrozšířenějšími editory jsou například: \texttt{LyX}, \texttt{TeXnicCenter}, \texttt{AUCTEX} nebo
+\texttt{Texmaker} \cite{dipl1}
+
+
+\section{Širší využití}
+Typografie jako umění uspořádat písma, vybrat vhodný styl, řádkování, rozložení a~design má podstatný význam například při tvorbě loga a~reklamy. \cite{typoOnLogo}
+
+S~tím vzniká mladý koncept a to kreativní typografie. Dochází k tomu s rozvojem médií a marketingu. Samotné písmo už není jen sada znaků, s nimiž tvoříme slova, nýbrž obrázek, kterým chceme ukázat nebo zesílit význam. Nadpisy v novinách, knihách, reklamách, billboardech a jiných komunikačních prostředích. \cite{basisTypo}
+
+\newpage
+\renewcommand{\refname}{Literatura}
+\bibliographystyle{czechiso}
+\bibliography{proj4}
+
+\end{document}
