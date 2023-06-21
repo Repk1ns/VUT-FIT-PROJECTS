@@ -1,0 +1,14 @@
+Knapsack {
+maxWeight: 130
+minCost: 65
+items: [
+Item {
+weight: 90
+cost: 15
+}
+Item {
+weight: 57
+cost: 65
+}
+]
+}

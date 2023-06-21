@@ -1,0 +1,4 @@
+Knapsack {
+    maxWeight: 46
+    minCost: 324
+}
