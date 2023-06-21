@@ -1,0 +1,44 @@
+#### Stručně odpovězte na následující otázky: ######
+
+1. Proč je nutné určovat, zda má výpočet pokračovat?
+==============================================================================
+Vzhledem k tomu, že u řádku, který aktuálně procházíme a nastavujeme u jeho jednotlivých prvků hodnotu iterace, je možné,
+že všechny tyto hodnoty jednotlivým prvkům nastavíme dřív, než smyčka pro iterace doběhne. V takovém případě je efektivní smyčku přerušit pomocí break;
+Pokud bysme smyčku nezrušili, zbytečně bychom dál procházeli řádek stále dokola (až do zadaného limitu), avšak žádnému prvku 
+bychom žádnou novou hodnotu iterace už nenastavili. Jednalo by se tedy o zbytečné procházení, zbytečný výpočetní čas a tím pádem horší efektivitu.
+
+
+2. Byla "Line" vektorizace efektivní? Proč?
+==============================================================================
+Line kalkulátor byl efektivní vůči referenčnímu řešení, protože byly některé části kódu (smyčky) zvektorizovány.
+Naopak oproti kalkulátoru Batch byla Line neefektivní, kvůli neefektivnímu využívání cache.
+
+
+3. Jaká byla dosažena výkonnost v Intel Advisoru pro jednotlivé implementace 
+(v GFLOPS)?
+==============================================================================
+Pro implementaci Line: 31.518 GFLOPS
+Pro implementaci Batch: 40.459 GFLOPS
+
+
+4. Jaká část kódu byla vektorizována v "Line" implementaci? Vyčteme tuto 
+informaci i u batch kalkulátoru?
+==============================================================================
+Vektorizována byla část kódu, která řeší výpočet a nastavení iterace pro dané prvky (pixely) tj. nejvnitřnější smyčka kódu.
+A také smyčka pro inicializaci pomocných polí.
+
+Informace ohledně vektorizovaných částí kódu (smyček) nalezneme buďto prostřednictvím programu Intel Advisor, a nebo v informačních build souborech *.optrpt.
+V souborech *.optrpt lze nalézt informace o vektorizovaných částech kódu (smyčkách) jak pro Line kalkulátor, tak pro Batch kalkulátor.
+
+
+5. Co vyčteme z Roofline modelu pro obě vektorizované implementace?
+==============================================================================
+Roofline model nám popisuje výkon algoritmu na základě aritmetické intenzity, propustnosti paměti a výpočetního výkonu.
+Ukazuje hardwarové omezení počítače, které jsou vykreslené jako čáry v tomto grafu (nazývané střechy).
+Střecha je vykreslena s osou X a značí nám zmiňovanou aritmetickou intenzitu. Osa Y nám udává výkon v GFLOPS (GFLOP/vteřinu).
+To vše v logaritmickém měřítku.
+Vodorovné čáry představují počet výpočtů s plovoucí desetinnou čárkou daného typu, které může HW provést v daném časovém úseku.
+Diagonální čáry nám říkají, kolik bajtů dat může daný pamětový subsystém dodat za vteřinu.
+Vyčíst tedy lze informace ohledně našich vektorizovaných smyček.
+Zobrazené tečky jsou smyčky v našem programu. To v jaké je poloze nám udává její výkon.
+Velikost a barva těchto teček nám ukazuje kolik z celkového času programu zabere daná smyčka.

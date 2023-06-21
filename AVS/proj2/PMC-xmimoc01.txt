@@ -1,0 +1,97 @@
+Architektury Výpočetních Systémů (AVS 2021)
+Projekt č. 2 (PMC)
+Login: xmimoc01
+
+Úloha 1: Paralelizace původního řešení
+===============================================================================
+
+1) Kterou ze smyček (viz zadání) je vhodnější paralelizovat a co způsobuje 
+   neefektivitu paralelizaci té druhé?
+
+   Smyčka (for cyklus) vhodnější k paralelizaci je ta, která se nachází v metodě marchCubes().
+   Druhá smyčka v metodě evaluateFieldAt() je prakticky vnořenou smyčkou prvního cyklu, jelikož
+   je volána z metody buildCube(). Nevhodná k paralelizaci je proto, že by paralelizovaná část kódu byla
+   poměrně malá - většina kódu předtím by byla sekvenční a tudíž bychom paralelizovali malou část s jednoduchými výpočty,
+   což je neefektivní. První smyčka je tudíž k paralelizaci lepší.
+
+2) Jaké plánování (rozdělení práce mezi vlákna) jste zvolili a proč? 
+   Jaký vliv má velikost "chunk" při dynamickém plánování (8, 16, 32, 64)?
+
+   Zvolil jsem statické plánování. To z toho důvodu, že náročnost výpočtu v každé iteraci je zhruba stejná.
+   Velikost chunku má vliv v rovnoměrném rozdělení práce mezi vlákna. Při zvolení vyšší hodnoty rychlost (efektivita) lehce klesala.
+
+3) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+
+   Pomocí kritické sekce, konkrétně pomocí direktivy #pragma omp reduction(+: totalTriangles)
+
+Úloha 2: Paralelní průchod stromem
+===============================================================================
+
+1) Stručně popište použití OpenMP tasků ve vašem řešení.
+
+   Paralelizace výpočtu algoritmu je zajištěná díky rekurzivnímu volání metody marchCubesGridCheck(),
+   a pragmy omp parallel. Na začátku začíná paralelizace jedním procesem a to díky #pragma omp single.
+   Následně v metodě marchCubesGridCheck() začíná paralelně pracovat více procesů. Zde jsou použité pragmy omp task
+   společně s pragmami omp shared() kvůli sdílené proměnné. Ve zmiňované metodě marchCubesGridCheck() jsou
+   tyto pragmy použity na 8 místech - vytváření nových tasků. To proto, že se aktuální "kostka" vždy díky rekurzi dále rozděluje na
+   dalších 8 podprostorů (dalších menších 8 "kostek"). Rovněž jsou zde používány pragmy omp atomic pro kritickou
+   sekci sdílené proměnné totalTriangles. Na konci metody je důležité počkat na dokončení všech procesů. 
+   Proto je zde využita #pragma omp taskwait.
+
+2) Jakým způsobem jste realizovali sesbírání celkového počtu trojúhelníků?
+
+   K sesbírání celkového počtu trojúhelníků je využívána metoda buildCube(). Ta je volána
+   z rekurzivní metody marchCubesGridCheck(). Z těchto rekurzivních volání se hodnoty trojúhelníků vždy
+   přičtou do proměnné totalTriangles.
+
+3) Jaký vliv má na vaše řešení tzv. "cut-off"? Je vhodné vytvářet nový 
+   task pro každou krychli na nejnižší úrovni?
+
+   Cut-off udává, jak hluboké bude zanoření díky rekurzivnímu volání. Vyšší hodnota cut-offu tedy způsobí větší zanoření
+   a tím pádem větší přesnost řešení.
+   Osobně si myslím, že je vhodné vytvářet task i na nejnižší úrovni.
+
+4) Jakým způsobem zajišťujete ukládání trojúhelníků z několika vláken současně?
+
+   Díky pragmě omp critical, resp. díky kritické sekci. (Ta totiž zajišťuje výlučný přístup pro jeden proces)
+
+Úloha 3: Grafy škálování všech řešení
+===============================================================================
+
+1) Stručně zhodnoťte efektivitu vytvořených řešení (na základě grafů škálování).
+
+   Z grafů lze vidět, že jak řešení Octree tak Loop vykazují větší čas při větším počtu prvků v mřížce.
+   Pro menší počet prvků v mřížce se řešení Loop jeví jako efektivnější. Naopak řešení Octree je jeví efektivnější při větším počtů bodů v mřížce.
+   Bod zlomu, do kdy je řešení Loop efektivnější vychází zhruba na 2^11 či 2^12 prvků v mřížce.
+
+2) V jakém případě (v závislosti na počtu bodů ve vstupním souboru a velikosti 
+   mřížky) bude vaše řešení 1. úlohy neefektivní? (pokud takový případ existuje)
+
+   Na základě grafu slabého škálování, lze odvodit, že algoritmus loop, je pro malý počet bodů (malá velikost mřížky) na vstupu a velký počet vláken poměrně neefektivní.
+
+3) Je (nebo není) stromový algoritmus efektivnější z pohledu slabého škálování 
+   vzhledem ke vstupu?
+
+   Z pohledu slabého škálování se algoritmus Octree jeví jako méně efektivní než algoritmus Loop, u kterého lze vidět více konstatní časovou náročnost.
+
+Úloha 4: Analýza využití jader pomocí VTune
+================================================================================
+
+1) Jaké bylo průměrné využití jader pro všechny tři implementace s omezením na 
+   18 vláken? Na kolik procent byly využity?
+   
+   ref: 2.8% (0.996 jader)
+   loop: 47.5% (17.099 jader)
+   tree: 40.3% (14.506 jader)
+
+2) Jaké bylo průměrné využití jader pro všechny tři implementace s využitím 
+   všech jader? Na kolik procent se podařilo využít obě CPU?
+   
+   ref: 2.8% (0.996 jader)
+   loop: 86.5% (31.133 jader)
+   tree: 62.7% (22.555 jader)
+
+3) Jaké jsou závěry z těchto měření?
+
+   Na základě těchto provedených měření nástrojem VTune, lze usoudit, že řešení Loop je lépe paralelizováno
+   a efektivněji využívá dostupná jádra. A to jak v případě s omezenými vlákny (18) či s využitím všech jader.
