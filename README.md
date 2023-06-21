@@ -15,6 +15,7 @@ Bližší informace o konkrétním projektu jsou uvnitř složky s projektem.
 - **IPP** 1. projekt: 6.8/7
 - **IAL** 1. projekt: 9/10
 - **IAL** 2. projekt: 10/10
+- **IFJ** 1. projekt: 14/15 https://github.com/Repk1ns/IFJ
 - **IMP**: 11.7/14
 - **IMS**: 16/20
 - **ISA**: 14/20
