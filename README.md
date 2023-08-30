@@ -36,3 +36,4 @@ Bližší informace o konkrétním projektu jsou uvnitř složky s projektem.
 - **HSC** 1. projekt: 10/10
 - **HSC** 2. projekt: 10/15
 - **PCS** teoretický projekt: 4.8/6
+- **EVO** 1. projekt: 20/22
