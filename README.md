@@ -1,4 +1,4 @@
-# VUT FIT - Projekty
+# Fakulta informačních technologií VUT v Brně - Projekty
 
 Tak jako velká spousta mých vysokoškolských kolegů dává své projekty veřejně k dispozici, pro některé jsem se rozhodl i já (alespoň pro ty povedené). 
 Projekty by měli sloužit především dalším generacím pro inspiraci a bližšímu porozumění.
